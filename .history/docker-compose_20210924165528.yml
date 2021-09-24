@@ -1,0 +1,6 @@
+version: "3.8"
+
+service:
+  db:
+    build: ./client
+    command: sh
