@@ -1,9 +1,0 @@
-version: "3.8"
-
-service:
-  db:
-    image: p
-  
-  kmdb:
-    build: ./client
-    command: sh
