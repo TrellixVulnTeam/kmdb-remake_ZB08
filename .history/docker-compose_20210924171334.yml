@@ -1,0 +1,12 @@
+version: "3.8"
+
+service:
+  db:
+    image: postgres
+    enviroment: ./envs/env
+  
+  kmdb:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes: .:/code
+    

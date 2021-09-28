@@ -1,0 +1,10 @@
+version: "3.8"
+
+service:
+  db:
+    image: postgres
+    enviroment:
+  
+  kmdb:
+    build: ./client
+    command: sh
