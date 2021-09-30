@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zyt0(dbio!tlhao2k$lg-t1b-$-=ss2fiznau3w=ah2c*_052j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'accounts',
     'movies',
 ]
