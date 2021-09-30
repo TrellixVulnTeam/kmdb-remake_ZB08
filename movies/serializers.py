@@ -7,8 +7,6 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-    
-
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
@@ -32,18 +30,9 @@ class MovieSerializer(serializers.ModelSerializer):
         return movie
 
 
-class MovieRetrieveSerializer(serializers.ModelSerializer):
+class FullMovieSerializer(serializers.ModelSerializer):
     genres = GenreSerializer(many=True)
     reviews = ReviewSerializer(many=True)
-    class Meta:
-        model = Movie
-        fields = '__all__'
-
-
-    
-class BasicMovieSerializer(serializers.ModelSerializer):
-    genres = GenreSerializer(many=True)
-
     class Meta:
         model = Movie
         fields = '__all__'
