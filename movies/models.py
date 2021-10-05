@@ -13,6 +13,9 @@ class Genre(models.Model):
     name = models.CharField(max_length=255)
     movie = models.ManyToManyField(Movie, related_name='genres')
 
+    class Meta:
+        ordering = ['id']
+
 class Review(models.Model):
     stars = models.IntegerField(
         validators=[
