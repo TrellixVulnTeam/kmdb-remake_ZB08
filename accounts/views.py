@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
-from accounts.serializers import UserSerializer
+from accounts.serializers import UserSerializer, LoginSerializer
 
 class AccountView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -13,6 +13,9 @@ class AccountView(generics.CreateAPIView):
 
 class LoginView(APIView):
     def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
         user = authenticate(username=request.data['username'], password=request.data['password'])
 
         if user:

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
 class Movie(models.Model):
@@ -13,7 +14,12 @@ class Genre(models.Model):
     movie = models.ManyToManyField(Movie, related_name='genres')
 
 class Review(models.Model):
-    stars = models.IntegerField()
+    stars = models.IntegerField(
+        validators=[
+            MinValueValidator(1, message={"stars": ["Ensure this value is greater than or equal to 1."]}),
+            MaxValueValidator(10, message={"stars": ["Ensure this value is less than or equal to 10."]})
+        ]
+    )
     review = models.TextField()
     spoilers = models.BooleanField()
     critic = models.ForeignKey(User, on_delete=models.CASCADE, related_name='critic_reviews', null=True)
