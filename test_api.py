@@ -172,7 +172,6 @@ class TestMovieView(TestCase):
             "/api/movies/", self.movie_data_2, format="json"
         ).json()
         # testa se os ids do gênero drama são os mesmos
-        ipdb.set_trace()
         self.assertEqual(movie_1["genres"][1]["id"], movie_2["genres"][0]["id"])
 
     def test_filter_movies_with_the_filter_request(self):
@@ -204,8 +203,7 @@ class TestMovieView(TestCase):
         # filter movies
         filter_movies = self.client.generic(
             method="GET",
-            path="/api/movies/",
-            data=json.dumps({"title": "liberdade"}),
+            path="/api/movies/?title=liberdade",
             content_type="application/json",
         )
 

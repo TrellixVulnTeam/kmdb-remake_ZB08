@@ -8,6 +8,14 @@ from .models import Movie, Review
 from .serializers import FullMovieSerializer, MovieSerializer, ReviewSerializer, CriticReviewSerializer
 from django_filters import rest_framework as filters
 
+
+class MovieFilter(filters.FilterSet):
+    title = filters.CharFilter(field_name='title', lookup_expr='icontains')
+
+    class Meta:
+        model = Movie
+        fields = ['title']
+
 class MovieView(generics.ListCreateAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
@@ -15,7 +23,8 @@ class MovieView(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAdmincOrReadOnly]
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('title')
+    filterset_fields = ('title',)
+    filterset_class = MovieFilter
 
 
 class RetrieveMovieView(generics.RetrieveDestroyAPIView):
