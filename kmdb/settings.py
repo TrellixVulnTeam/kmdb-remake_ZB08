@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-zyt0(dbio!tlhao2k$lg-t1b-$-=ss2fiznau3w=ah2c*_052j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'tkmdb.herokuappp.com']
+ALLOWED_HOSTS = ['tkmdb.herokuapp.com']
 
 
 # Application definition
@@ -100,6 +100,12 @@ else:
         }
     }
 
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+    db_from_env = dj_database_url.config(
+        default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+    DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -145,9 +151,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
 
-if DATABASE_URL:
-    db_from_env = dj_database_url.config(
-        default=DATABASE_URL, conn_max_age=500, ssl_require=True)
-    DATABASES['default'].update(db_from_env)
+
